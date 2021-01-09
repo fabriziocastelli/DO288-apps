@@ -10,8 +10,10 @@ ENV BACKEND_HOST=localhost:8081
 RUN yum install -y --disableplugin=subscription-manager --nodocs \
   nginx nginx-mod-http-perl \ 
   && yum clean all \ 
-  && cp nginx.conf /etc/nginx/ \
-  && touch /run/nginx.pid \ 
+
+COPY nginx.conf /etc/nginx/ \
+ 
+RUN touch /run/nginx.pid \ 
   && chgrp -R 0 /var/log/nginx /run/nginx.pid \
   && chmod -R g=u /var/log/nginx /run/nginx.pid
   
